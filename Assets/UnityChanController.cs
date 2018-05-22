@@ -32,12 +32,16 @@ public class UnityChanController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
 		// 走るアニメーションを再生するために、Animatorのパラメータを調節する
 		this.animator.SetFloat("Horizontal", 1);
 
 		// 着地しているかどうかを調べる
 		bool isGround = (transform.position.y > this.groundLevel) ? false : true;
 		this.animator.SetBool ("isGround", isGround);
+
+		// ジャンプ状態のときにはボリュームを0にする（追加）
+		GetComponent<AudioSource> ().volume = (isGround) ? 1 : 0;
 
 		// 着地状態でクリックされた場合（追加）
 		if (Input.GetMouseButtonDown (0) && isGround) {
@@ -49,6 +53,8 @@ public class UnityChanController : MonoBehaviour {
 		if (Input.GetMouseButton (0) == false) {
 			if (this.rigid2D.velocity.y > 0) {
 				this.rigid2D.velocity *= this.dump;
+
+
 			}
 		}
 

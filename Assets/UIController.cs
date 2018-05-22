@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; //（追加）
 
 public class UIController : MonoBehaviour
 {
@@ -37,6 +38,16 @@ public class UIController : MonoBehaviour
 
 			// 走った距離を表示する
 			this.runLengthText.GetComponent<Text> ().text = "Distance:  " + len.ToString ("F2") + "m";
+
+		}
+
+			// ゲームオーバになった場合
+			if (this.isGameOver){
+				// クリックされたらシーンをロードする（追加）
+				if (Input.GetMouseButtonDown (0)){
+					//GameSceneを読み込む（追加）
+					SceneManager.LoadScene ("GameScene");
+				}
 		}
 	}
 
